@@ -7,7 +7,7 @@ export const trips = [
 
         "resort": "Emerald Bay, 3 stars",
         "perPerson": "799.00",
-        "image": "images/reef1.jpg",
+        "image": "reef1.jpg",
         "description": "<p> Gale Reef Nulla facilisi. Donec a orci tellus, et auctor odio. Fusce ac orci nibh, quis semper arcu. Cras orci neque, euismod et accumsan ac, sagittis molestie lorem. Proin odio sapien, elementum at tempor non.. "
     },
     {
@@ -17,7 +17,7 @@ export const trips = [
         "start": "2021-03-15T08:00:00Z",
         "resort": "Blue Lagoon, 4 stars",
         "perPerson": "1199.00",
-        "image": "images/reef2.jpg",
+        "image": "reef2.jpg",
         "description": "Dawson's Reef. Nulla facilisi. Donec a orci tellus, et auctor odio. Fusce ac orci nibh, quis semper arcu. Cras orci neque, euismod et accumsan ac, sagittis molestie lorem. Proin odio sapien, elementum at tempor non."
     },
     {
@@ -27,7 +27,7 @@ export const trips = [
         "start": "2021-06-21T08:00:00Z",
         "resort": "Coral Sands, 5 stars",
         "perPerson": "1999.00",
-        "image": "images/reef3.jpg",
+        "image": "reef3.jpg",
         "description": "Claire's Reef. Nulla facilisi. Donec a orci tellus, et auctor odio. Fusce ac orci nibh, quis semper arcu. Cras orci neque, euismod et accumsan ac, sagittis molestie lorem. Proin odio sapien, elementum at tempor non."
     }
 ];
