@@ -15,8 +15,6 @@ var travelRouter = require('./app_server/routes/travel');
 var apiRouter= require('./app_api/routes/index');
 var handlebars = require('hbs');
 
-
-
 // Bring in the database
 require('./app_api/models/db')
 require('./app_api/models/user');
@@ -46,14 +44,13 @@ app.use ('/api', (req, res, next) => {
   next();
 });
 
-// wire-uproutes to controllers 
+// wire-up routes to controllers 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
 app.use('/api', apiRouter);
 
-
-// Catch unaithorized error and create 401 
+// Catch unauthorized error and create 401 
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     return res

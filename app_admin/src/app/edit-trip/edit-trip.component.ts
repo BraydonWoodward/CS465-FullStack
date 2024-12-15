@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-edit-trip',
@@ -20,8 +21,10 @@ export class EditTripComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private tripDataService: TripDataService
+    private tripDataService: TripDataService,
+    private authenticationService: AuthenticationService
   ) { }
+
   ngOnInit(): void {
     //Retrieve stashed trip ID
     let tripCode = localStorage.getItem("tripCode");
@@ -44,7 +47,8 @@ export class EditTripComponent implements OnInit {
       perPerson: ['', Validators.required],
       image: ['', Validators.required],
       description: ['', Validators.required]
-    })
+    });
+
     this.tripDataService.getTrip(tripCode)
       .subscribe({
         next: (value: any) => {
@@ -53,8 +57,7 @@ export class EditTripComponent implements OnInit {
           this.editForm.patchValue(value[0]);
           if (!value) {
             this.message = 'No Trip Retrieved!';
-          }
-          else {
+          } else {
             this.message = 'Trip: ' + tripCode + ' retrieved';
           }
           console.log(this.message);
@@ -62,25 +65,32 @@ export class EditTripComponent implements OnInit {
         error: (error: any) => {
           console.log('Error: ' + error);
         }
-      })
+      });
   }
 
   public onSubmit() {
     this.submitted = true;
     if (this.editForm.valid) {
+      // Format the date to "yyyy-MM-dd"
+      const startDate = new Date(this.editForm.value.start);
+      const formattedDate = startDate.toISOString().split('T')[0]; // Get the date in "yyyy-MM-dd" format
+      this.editForm.patchValue({ start: formattedDate }); // Update the form value with the formatted date
+
       this.tripDataService.updateTrip(this.editForm.value)
         .subscribe({
           next: (value: any) => {
             console.log(value);
+            alert('Trip updated successfully!');
             this.router.navigate(['']);
           },
           error: (error: any) => {
             console.log('Error: ' + error);
+            alert('Failed to upload trip');
           }
-        })
+        });
     }
   }
-  // get the form short name to access the form fields
+
+  // Getter for form controls
   get f() { return this.editForm.controls; }
 }
-

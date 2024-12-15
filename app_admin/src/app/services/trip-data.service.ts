@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, catchError} from 'rxjs';
 
 import { Trip } from '../models/trip';
@@ -23,15 +23,22 @@ export class TripDataService {
     return this.http.get<Trip[]>(this.tripUrl);
   }
   addTrip(formData: Trip) : Observable<Trip> {
-    return this.http.post<Trip>(this.tripUrl , formData);
+    const token = localStorage.getItem('travlr-token'); // Retrieve the token from local storage or wherever you store it
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<Trip>(this.tripUrl , formData, { headers } );
   }
   getTrip(tripCode: string): Observable<Trip[]> {
     // console.log('inside TripDataService::getTrips');
     return this.http.get<Trip[]>(this.tripUrl + '/' + tripCode);
   }
-  updateTrip(formData: Trip) : Observable<Trip> {
-    // console.log('inside TripDataService::updateTrip()');
-    return this.http.put<Trip>(this.tripUrl + '/' + formData.code, formData);
+  updateTrip(formData: any): Observable<any> {
+    const token = localStorage.getItem('travlr-token'); // Retrieve the token from local storage or wherever you store it
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(`${this.tripUrl}/${formData.code}`, formData, { headers });
   }
   private makeAuthApiCall(urlPath: string, user: User): Observable<AuthResponse> {
     const url: string = `${this.apiBaseUrl}/${urlPath}`;

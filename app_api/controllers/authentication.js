@@ -2,7 +2,6 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const User = require('../models/user');
 
-
 // Register function using async/await
 const register = async (req, res) => {
     if (!req.body.name || !req.body.email || !req.body.password) {
@@ -40,6 +39,7 @@ const login = (req, res) => {
         }
         if (user) {
             const token = user.generateJwt();
+            console.log("Generated Token:", token); // Log the generated token
             res
                 .status(200)
                 .json({ token });

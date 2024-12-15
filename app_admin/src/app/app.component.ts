@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet, NavbarComponent, TripListingComponent, HomeComponent, LoginComponent, TripCardComponent ], // add back if needed TripListingComponent, HomeComponent, LoginComponent
+  imports: [ CommonModule, RouterOutlet, NavbarComponent ], // add back if needed , TripListingComponent, HomeComponent, LoginComponent, TripCardComponent
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

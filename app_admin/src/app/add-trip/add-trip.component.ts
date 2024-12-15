@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { TripDataService } from '../services/trip-data.service';
+import { Trip } from '../models/trip';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-add-trip',
@@ -18,7 +20,9 @@ export class AddTripComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private tripService: TripDataService
+    private tripService: TripDataService,
+    private authenticationService: AuthenticationService
+
   ) { }
   ngOnInit() {
     this.addForm = this.formBuilder.group({
@@ -40,10 +44,12 @@ export class AddTripComponent implements OnInit {
         .subscribe({
           next: (data: any) => {
             console.log(data);
+            alert('Trip added successfully!');
             this.router.navigate(['']);
           },
           error: (error: any) => {
             console.log('Error: ' + error);
+            alert('Failed to add trip');
           }
         });
     }

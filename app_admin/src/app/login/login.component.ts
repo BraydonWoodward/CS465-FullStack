@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.credentials).subscribe(
       (authResponse: AuthResponse) => {
         // Handle successful login
-        this.router.navigateByUrl('#'); // Redirect to a new page upon successful login
+        this.router.navigateByUrl('list-trips'); // Redirect to a new page upon successful login
       },
       (error: any) => {
         // Handle login error

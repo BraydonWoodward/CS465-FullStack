@@ -1,6 +1,6 @@
 const tripsEndpoint = 'http:localhost:3000/api/trips';
 const options = {
-    method: 'GET',
+    method: ['GET', 'POST', 'PUT'],
     headers: {
         'Accept': 'application/json'
     }

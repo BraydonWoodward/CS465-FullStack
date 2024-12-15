@@ -62,17 +62,15 @@ export class AuthenticationService {
   // Retrieves the current user information based on the logged-in status and JWT token
   public getCurrentUser(): User | null {
     if (this.isLoggedIn()) {
-      const token: string = this.getToken();
-      try {
-        const { email, name } = JSON.parse(atob(token.split('.')[1]));
-        return { email, name } as User;
-        // Extract the user's email and name from the token
-      } catch (e) {
-        // Handle decoding error, e.g., by logging it
-        console.error('Error decoding token:', e);
-        return null;
-      }
+    const token: string = this.getToken();
+    const { email, name } =
+   JSON.parse(atob(token.split('.')[1]));
+    return { email, name } as User;
     }
-    return null;
+    else{
+      console.log('No user logged in');
+      return null;
+    }
   }
+
 }
